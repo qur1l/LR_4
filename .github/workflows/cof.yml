@@ -1,0 +1,22 @@
+name: Compile all
+run-name: Compiling
+on: [push]
+jobs:
+  compile_on_ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Make exec
+        run: |
+          cmake -H. -B_build
+          cmake --build _build
+  compile_on_windows:
+    runs-on: windows-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: CMake Actions
+        uses: threeal/cmake-action@v1.3.0
